@@ -9,4 +9,4 @@ Derive Signature for t.
 Derive NoConfusionHom for t.
 Derive Subterm for t.
 
-Definition test := well_founded_t_subterm.
+Definition test := well_founded_vec_subterm.

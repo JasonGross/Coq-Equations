@@ -208,7 +208,7 @@ Print Assumptions vector_eqdec.
 
 Derive Subterm for vector.
 
-(** The relation is actually called [t_subterm] as [vector] is just
+(** The relation is actually called [vec_subterm] as [vector] is just
     a notation for [Vector.t]. *)
 
 Section foo.
@@ -220,7 +220,7 @@ Section foo.
       at the packed type [{ n : nat & vector A n}]. *)
 
   Equations unzip {n} (v : vector (A * B) n) : vector A n * vector B n
-    by wf (signature_pack v) (@t_subterm (A * B)) :=
+    by wf (signature_pack v) (@vec_subterm (A * B)) :=
   unzip []v := ([]v, []v) ;
   unzip (Vector.cons (x, y) v) with unzip v := {
     | pair xs ys := (Vector.cons x xs, Vector.cons y ys) }.

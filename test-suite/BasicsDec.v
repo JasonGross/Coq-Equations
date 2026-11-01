@@ -38,13 +38,13 @@ Defined.
 
 Derive Subterm for vector.
 
-Print Assumptions well_founded_t_subterm.
+Print Assumptions well_founded_vec_subterm.
 
 (** A closed proof of well-foundedness relying on the decidability
    of [A]. *)
 
 Lemma well_founded_vector_direct_subterm' :
-  forall A : Type, EqDec A -> WellFounded (t_subterm A).
+  forall A : Type, EqDec A -> WellFounded (vec_subterm A).
 Proof. intros.
   apply Transitive_Closure.wf_clos_trans.
   intro. simp_sigmas.

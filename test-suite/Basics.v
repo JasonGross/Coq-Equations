@@ -163,7 +163,7 @@ Defined.
 (** A closed proof of well-foundedness relying on the decidability
    of [A]. *)
 
-Definition vector_subterm A := t_subterm A.
+Definition vector_subterm A := vec_subterm A.
 
 (* Instance well_founded_vector_direct_subterm' : *)
 (*   forall A : Type, EqDec A -> WellFounded (vector_subterm A) | 0. *)
