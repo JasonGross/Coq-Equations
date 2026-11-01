@@ -332,7 +332,18 @@ let free_vars_of_constr_expr env sigma fid c =
            | Globnames.TrueGlobal gr ->
              if not (Globnames.isConstructRef gr) then Id.Set.add id l
              else l
-           | Globnames.Abbrev _ -> l
+           | Globnames.Abbrev kn ->
+             (* An abbreviation of a non-constructor (for instance [Vector.t]
+                since Stdlib 9.3) names a variable, as a non-constructor global
+                does. *)
+             let rec head = function
+               | Notation_term.NRef (gr, _) -> Some gr
+               | Notation_term.NApp (c, _) -> head c
+               | _ -> None
+             in
+             (match head (snd (Abbreviation.find_interp kn)) with
+              | Some gr when Globnames.isConstructRef gr -> l
+              | _ -> Id.Set.add id l)
          with Not_found -> Id.Set.add id l)
     | { CAst.v = CNotation (_, {ntn_entry = InConstrEntry; ntn_key = "?( _ )"}, _) } -> l
     | c -> fold_constr_expr_with_binders (fun a l -> a::l) aux bdvars l c
